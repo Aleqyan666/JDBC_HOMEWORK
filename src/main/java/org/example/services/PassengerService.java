@@ -23,7 +23,7 @@ public class PassengerService {
         try {
             con = DriverManager.getConnection(url, user, pass);
             st = con.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM passengers WHERE id=" + id);
+            ResultSet rs = st.executeQuery("SELECT * FROM passengers WHERE psg_id=" + id);
             while (rs.next()) {
                 passenger.setId(rs.getInt("id"));
                 passenger.setName(rs.getString("name"));
@@ -79,7 +79,7 @@ public class PassengerService {
     public void update(Passenger passenger, int psgId) throws SQLException, RuntimeException {
         try {
             con = DriverManager.getConnection(url, user, pass);
-            pst = con.prepareStatement("UPDATE passengers SET  name=?,phone=?,country=?,city=? WHERE id=?");
+            pst = con.prepareStatement("UPDATE passengers SET  name=?,phone=?,country=?,city=? WHERE psg_id=?");
             pst.setString(1, passenger.getName());
             pst.setString(2, passenger.getPhone());
             pst.setString(3, passenger.getCountry());
@@ -105,7 +105,7 @@ public class PassengerService {
             if (count > 0) {
                 System.out.println("First remove the passenger from the pass_in_trip table");
             } else {
-                pst = con.prepareStatement("DELETE FROM passengers WHERE id=?");
+                pst = con.prepareStatement("DELETE FROM passengers WHERE psg_id=?");
                 pst.setInt(1, psgId);
                 int row = pst.executeUpdate();
                 if (row > 0) {
