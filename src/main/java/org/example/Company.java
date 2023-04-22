@@ -1,7 +1,13 @@
 package org.example;
 
+import jakarta.persistence.*;
+
 import java.util.Date;
+@Entity
+@Table (name = "companies")
 public class Company {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int companyId;
     private String name;
     private Date foundDate;

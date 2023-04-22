@@ -1,6 +1,12 @@
 package org.example;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "passengers")
 public class Passenger {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
     private String phone;

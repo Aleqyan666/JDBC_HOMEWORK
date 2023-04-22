@@ -1,8 +1,17 @@
 package org.example;
 
+import jakarta.persistence.*;
+
 import java.sql.Timestamp;
+@Entity
+@Table(name = "trip")
+
 public class Trip {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int tripId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int companyId;
     private String airplane;
     private String townFrom;
