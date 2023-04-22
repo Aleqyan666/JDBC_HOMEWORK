@@ -1,11 +1,14 @@
 package org.example;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.sql.Timestamp;
 @Entity
+@Getter @Setter @ToString
 @Table(name = "trip")
-
 public class Trip {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,66 +37,5 @@ public class Trip {
 
     public Trip(int triId) {
         this.tripId = triId;
-    }
-
-    public int getTripId() {
-        return tripId;
-    }
-
-    public void setTripId(int tripId) {
-        this.tripId = tripId;
-    }
-
-    public int getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(int companyId) {
-        this.companyId = companyId;
-    }
-
-    public String getAirplane() {
-        return airplane;
-    }
-
-    public void setAirplane(String airplane) {
-        this.airplane = airplane;
-    }
-
-    public String getTownFrom() {
-        return townFrom;
-    }
-
-    public void setTownFrom(String townFrom) {
-        this.townFrom = townFrom;
-    }
-
-    public String getTownTo() {
-        return townTo;
-    }
-
-    public void setTownTo(String townTo) {
-        this.townTo = townTo;
-    }
-
-    public Timestamp getTimeOut() {
-        return timeOut;
-    }
-
-    public void setTimeOut(Timestamp timeOut) {
-        this.timeOut = timeOut;
-    }
-
-    public Timestamp getTimeIn() {
-        return timeIn;
-    }
-
-    public void setTimeIn(Timestamp timeIn) {
-        this.timeIn = timeIn;
-    }
-
-    @Override
-    public String toString() {
-        return "" + tripId + " " + companyId + " " + airplane + " " + townFrom + " " + townTo + " " + timeOut + " " + timeIn;
     }
 }

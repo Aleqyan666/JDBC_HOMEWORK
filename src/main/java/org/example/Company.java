@@ -1,10 +1,14 @@
 package org.example;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.Date;
 @Entity
 @Table (name = "companies")
+@Getter @Setter @ToString
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,33 +30,5 @@ public class Company {
     public Company() {
     }
 
-    public int getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(int companyId) {
-        this.companyId = companyId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Date getFoundDate() {
-        return foundDate;
-    }
-
-    public void setFoundDate(Date foundDate) {
-        this.foundDate = foundDate;
-    }
-
-    @Override
-    public String toString() {
-        return "" + companyId + " " + name + " " + foundDate;
-    }
 
 }
