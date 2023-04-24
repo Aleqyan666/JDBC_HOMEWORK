@@ -27,8 +27,6 @@ public class PassengerService {
             while (rs.next()) {
                 passenger.setId(rs.getInt("id"));
                 passenger.setName(rs.getString("name"));
-                passenger.setCity(rs.getString("city"));
-                passenger.setCountry(rs.getString("country"));
                 passenger.setPhone(rs.getString("phone"));
             }
         } catch (SQLException e) {
@@ -48,7 +46,7 @@ public class PassengerService {
             ResultSet rs = st.executeQuery("SELECT * FROM passengers");
             while (rs.next()) {
                 passengerSet.add(new Passenger(rs.getString("name"), rs.getString("phone"),
-                        rs.getString("country"), rs.getString("city"), rs.getInt("id")));
+                         rs.getInt("id")));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -62,11 +60,9 @@ public class PassengerService {
     public void savePassenger(Passenger passenger) throws SQLException {
         try {
             con = DriverManager.getConnection(url, user, pass);
-            pst = con.prepareStatement("insert into passengers(name,phone,country,city)values (?,?,?,?)");
+            pst = con.prepareStatement("insert into passengers(name,phone)values (?,?)");
             pst.setString(1, passenger.getName());
             pst.setString(2, passenger.getPhone());
-            pst.setString(3, passenger.getCountry());
-            pst.setString(4, passenger.getCity());
             pst.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -79,12 +75,10 @@ public class PassengerService {
     public void update(Passenger passenger, int psgId) throws SQLException, RuntimeException {
         try {
             con = DriverManager.getConnection(url, user, pass);
-            pst = con.prepareStatement("UPDATE passengers SET  name=?,phone=?,country=?,city=? WHERE psg_id=?");
+            pst = con.prepareStatement("UPDATE passengers SET  name=?,phone=? WHERE psg_id=?");
             pst.setString(1, passenger.getName());
             pst.setString(2, passenger.getPhone());
-            pst.setString(3, passenger.getCountry());
-            pst.setString(4, passenger.getCity());
-            pst.setInt(5, psgId);
+            pst.setString(3, String.valueOf(psgId));
             pst.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -185,7 +179,7 @@ public class PassengerService {
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 passengers.add(new Passenger(rs.getString("name"), rs.getString("phone"),
-                        rs.getString("country"), rs.getString("city"), rs.getInt("id")));
+                        rs.getInt("id")));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

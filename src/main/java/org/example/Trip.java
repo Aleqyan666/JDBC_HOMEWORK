@@ -1,17 +1,14 @@
 package org.example;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.sql.Timestamp;
 import java.util.Set;
 
 @Entity
 //@Getter @Setter @ToString
-@Data
+@Data @AllArgsConstructor @NoArgsConstructor
 @Table(name = "trip")
 
 public class Trip {
@@ -33,20 +30,7 @@ public class Trip {
     private Company company;
 
 
-    //    public Trip(int tripId, int companyId, String airplane, String townFrom, String townTo, Timestamp timeOut, Timestamp timeIn) {
-//        this.tripId = tripId;
-//        this.companyId = companyId;
-//        this.airplane = airplane;
-//        this.townFrom = townFrom;
-//        this.townTo = townTo;
-//        this.timeOut = timeOut;
-//        this.timeIn = timeIn;
-//    }
-//
-    public Trip() {
-    }
-
-    public Trip(int triId) {
+    public Trip(int triId, int companyId, String airplane, String townFrom, String townTo, Timestamp timeOut, Timestamp timeIn) {
         this.tripId = triId;
     }
 }

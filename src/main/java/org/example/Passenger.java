@@ -1,17 +1,15 @@
 package org.example;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "passengers")
-@Data
+@Data @AllArgsConstructor
+@NoArgsConstructor
 public class Passenger {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,9 +38,6 @@ public class Passenger {
         this.name = name;
         this.phone = phone;
 
-    }
-
-    public Passenger() {
     }
 
     public Passenger(int id) {
