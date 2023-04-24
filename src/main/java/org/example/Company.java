@@ -1,6 +1,7 @@
 package org.example;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -8,7 +9,7 @@ import lombok.ToString;
 import java.util.Date;
 @Entity
 @Table (name = "companies")
-@Getter @Setter @ToString
+@Data
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,6 +30,5 @@ public class Company {
 
     public Company() {
     }
-
 
 }

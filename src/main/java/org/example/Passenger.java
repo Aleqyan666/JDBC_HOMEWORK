@@ -1,35 +1,45 @@
 package org.example;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "passengers")
-@Getter @Setter  @ToString
+@Data
 public class Passenger {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
     private String phone;
-    private String country;
-    private String city;
 
-    public Passenger(String name, String phone, String country, String city, int id) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id",referencedColumnName = "id",nullable = false)
+    private Address address;
+    @ManyToMany
+    @JoinTable(
+            name = "pass_in_trip",
+            joinColumns = {@JoinColumn(name = "psg_id")},
+            inverseJoinColumns = {@JoinColumn(name = "trip_id")}
+    )
+    private List<Trip> trip = new ArrayList<Trip>();
+
+    public Passenger(String name, String phone, int id) {
         this.name = name;
         this.phone = phone;
-        this.country = country;
-        this.city = city;
         this.id = id;
     }
 
     public Passenger(String name, String phone, String country, String city) {
         this.name = name;
         this.phone = phone;
-        this.country = country;
-        this.city = city;
+
     }
 
     public Passenger() {
@@ -40,4 +50,4 @@ public class Passenger {
     }
 
 
-    }
+}
